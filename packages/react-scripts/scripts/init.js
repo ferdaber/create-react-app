@@ -37,8 +37,7 @@ module.exports = function(
 
   // Copy over some of the devDependencies
   appPackage.dependencies =
-    appPackage.dependencies ||
-    Object.assign({}, ownDevDependencies, ownTemplateDependencies);
+    Object.assign(appPackage.dependencies || {}, ownDevDependencies, ownTemplateDependencies);
 
   // Setup the script rules
   appPackage.scripts = {

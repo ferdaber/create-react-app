@@ -12,7 +12,7 @@ export const Header = styled.header`
 
 export const Title = styled.h1`font-size: 1.5rem;`
 
-export class App extends Component {
+export class App extends React.Component {
     render() {
         return (
             <Container>
