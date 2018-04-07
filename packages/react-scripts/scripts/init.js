@@ -29,11 +29,16 @@ module.exports = function(
   const ownPackageName = require(path.join(__dirname, '..', 'package.json'))
     .name;
   const ownPath = path.join(appPath, 'node_modules', ownPackageName);
+  const ownPackage = require(path.join(ownPath, 'package.json'));
   const appPackage = require(path.join(appPath, 'package.json'));
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
+  const ownTemplateDependencies = ownPackage.templateDependencies;
+  const ownDevDependencies = ownPackage.devDependencies;
 
   // Copy over some of the devDependencies
-  appPackage.dependencies = appPackage.dependencies || {};
+  appPackage.dependencies =
+    appPackage.dependencies ||
+    Object.assign({}, ownDevDependencies, ownTemplateDependencies);
 
   // Setup the script rules
   appPackage.scripts = {
